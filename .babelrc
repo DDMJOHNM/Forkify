@@ -1,0 +1,12 @@
+{
+    "preset":[
+        "env",{
+            "target":{
+                "browsers":[
+                    "lasr 5 versions",
+                    "ie >=8"
+                ]
+            }
+        }
+    ]
+}
