@@ -1,7 +1,7 @@
 ## Forkify
 
 Following along with Udemy course by Jonas Schmedtmann
-The complete Javascript Course 2020 to brush up on modern Javascript  
+The complete Javascript Course 2020 
 
 - Custom webpack scripts
 webpack.config.js
