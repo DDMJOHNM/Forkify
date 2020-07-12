@@ -22,6 +22,19 @@ npm install babel-polyfill --save
 
 ```
 
+NodeJS Crash Course
+JS Runtime outside of the browser V8 engine Google
+Server
+Routing
+
+```
+npm install nodemon -g
+```        
+
+
+
+
+
 
 
 
