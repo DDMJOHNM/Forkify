@@ -30,12 +30,6 @@ Routing
 npm install nodemon -g
 ```        
 
-Roadmap 
-Extend project 
-Express JS
-Node MySql Driver 
-Templating 
-
 ## Docker mySQL image
 https://hub.docker.com/_/mysql
 
@@ -61,18 +55,19 @@ express has no notion of database nor authentication
 
 npm install mysql
 
-### isssue to cope wtih authentication 
-Yeah sure why not
+### isssue to cope wtih authentication protocol
+
 ```
 ALTER USER ‘root’ IDENTIFIED WITH mysql_native_password BY ‘password’;
 flush privileges;
 ```
 
+##Convert to ExpressJS MVC mySql Application  
+```https://ipenywis.com/tutorials/What-is-the-MVC,-Creating-a-%5BNode.js-Express%5D-MVC-Application```
 
-
-
-
-
-
+## Never commit to git .env
+npm install dotenv --save
+## Requests
+npm i body-parser
 
 

@@ -1,44 +1,37 @@
 const express = require('express')
 const app = express()
-const port = 3000
 const mysql = require("mysql");
 const { template } = require('babel-core');
-
-//todo:
-//replace templates
-//comtrollers
-//routing
-//authentication
-//secure connection details 
-
-//mySql
-var connection = mysql.createConnection({
-    host:'localhost',
-    user:'root',
-    password:'john',
-    database:'nodetest'
-});
-
-connection.connect();
-
-connection.query('SELECT * FROM nodetest.Users',function(err,rows,fields){
-    if (err) throw err 
-    console.log('Result: ' + rows[0].name);
-});
-
-connection.end();
+const bootstrap = require("./bootstrap");
+let port = 3000;
+const bodyParser = require("body-parser");
 
 //serve static files
-//app.use('/static', express.static(__dirname, 'public'));
+// /app.use('/static', express.static(__dirname, 'public'));
 
-//Routing
-app.get('/', (req, res) => {   
-   
-    res.sendFile(`${__dirname}/templates/template-overview.html`);
+//Request Parsing
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
+const router = express.Router();
+//passed into app as middleware 
+app.use(router);
+
+bootstrap(app,router);
+
+router.get("/", (req, res, next) => {
+    return res.send("Hello There");
 });
 
-app.listen(port, () => console.log(`app listening at http://localhost:${port}`))
+router.use((err, req, res, next) => {
+    if (err) {
+       return res.send(err.message);
+    }
+  });
+
+
+app.listen(port ,() => console.log(`app listening at http://localhost:${port}/`));
+
 
 //initial project before express
 
