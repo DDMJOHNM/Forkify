@@ -15,11 +15,11 @@ var getData = function(callback) {
     });
 }
 
-var  getDataByID = function(callback) {
-    //check if id received from function call    
-    connection.query('SELECT * FROM nodetest.Users WHERE name=? AND password=?',['john','test'],function(err,rows,fields){
-        if (err) {
-            callback(err,null);
+var  getDataByID = function(callback,username,password) {
+
+    connection.query('SELECT * FROM nodetest.Users WHERE name=? AND password=?',[username,password],function(err,rows,fields){        
+        if (err) {  
+           callback(err,null);
         }  else {
             callback(null,rows);
             connection.end(); 
@@ -41,14 +41,18 @@ exports.getUsers = () => {
 }
 
 exports.getUserByID = (username,password) => {   
-   getDataByID(function (err, result) {
+
+ getDataByID(function (err, result) {
     if (err){
         return err;
     } else{         
-        res.push(result);        
+       res.push(result);            
     }
-  });    
-  
+  },username,password);    
+
+    
+    return res;
+
  }
  
  

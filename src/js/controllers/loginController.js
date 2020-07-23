@@ -1,6 +1,8 @@
 
 //Authentication Route
 exports.loginController = (req,res,next) =>{
-    res.render('login/login')
-  
+    if(req.method == 'GET' ){       
+        res.render('login/login')
+    }
+   
 };
