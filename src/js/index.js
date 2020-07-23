@@ -5,9 +5,12 @@ const { template } = require('babel-core');
 const bootstrap = require("./bootstrap");
 let port = 3000;
 const bodyParser = require("body-parser");
+const passport = require('passport');
+require('./passport/passport');
+let ejs = require('ejs');
 
 //serve static files
-// /app.use('/static', express.static(__dirname, 'public'));
+//app.use('/static', express.static(__dirname, 'public'));
 
 //Request Parsing
 app.use(bodyParser.json());
@@ -19,16 +22,17 @@ app.use(router);
 
 bootstrap(app,router);
 
-router.get("/", (req, res, next) => {
-    return res.send("Hello There");
-});
-
 router.use((err, req, res, next) => {
     if (err) {
        return res.send(err.message);
     }
   });
 
+//Auth 
+app.use(passport.initialize())
+
+//template 
+app.set('view engine', 'ejs');
 
 app.listen(port ,() => console.log(`app listening at http://localhost:${port}/`));
 

@@ -70,4 +70,9 @@ npm install dotenv --save
 ## Requests
 npm i body-parser
 
+## Authentication Passport
+npm install passport
+
+## View Templates Library
+npm install ejs
 
