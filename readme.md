@@ -84,3 +84,7 @@ npm install ejs
 ## bCrypt - try Argon later 
 npm i bcrypt
 
+## Session
+npm i express-session
+npm i express-flash
+

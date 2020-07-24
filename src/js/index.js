@@ -1,3 +1,7 @@
+if (process.env.NODE_ENV !== 'production'){
+    require('dotenv').config()
+}
+
 const express = require('express')
 const app = express()
 const mysql = require("mysql");
@@ -6,30 +10,44 @@ const bootstrap = require("./bootstrap");
 let port = 3000;
 const bodyParser = require("body-parser");
 const passport = require('passport');
-require('./passport/passport');
+// require('./passport/passport');
+const initializePassport = require('./passport-config');
+initializePassport(passport);
+
+
+
 let ejs = require('ejs');
+//let flash = require("express-flash");
+const session = require("express-session");
 
 //serve static files
 //app.use('/static', express.static(__dirname, 'public'));
 
 //Request Parsing
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({ extended: false }));
 
 const router = express.Router();
 //passed into app as middleware 
 app.use(router);
-
 bootstrap(app,router);
-
 router.use((err, req, res, next) => {
     if (err) {
        return res.send(err.message);
     }
-  });
+});
 
 //Auth 
 app.use(passport.initialize())
+
+//TODO secret to dot env
+app.use(session({
+  secret:'secret',
+  resave:false,
+  saveUninitialized:false,
+}));
+app.use(passport.session())
+//app.use(flash());
 
 //template 
 app.set('view engine', 'ejs');
