@@ -7,3 +7,4 @@ exports.getUsersController = (req,res,next) =>{
     }
     res.json(users);
 };
+

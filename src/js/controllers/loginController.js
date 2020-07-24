@@ -6,3 +6,10 @@ exports.loginController = (req,res,next) =>{
     }
    
 };
+
+exports.registerController = (req,res,next) =>{
+    if(req.method == 'GET' ){       
+        res.render('login/register')
+    }
+   
+};

@@ -1,4 +1,4 @@
-## Forkify
+## NodeJS CMS AWS and VueJs
 
 Following along with Udemy course by Jonas Schmedtmann
 The complete Javascript Course 2020 
@@ -29,6 +29,7 @@ Routing
 ```
 npm install nodemon -g
 ```        
+run app nodemon
 
 ## Docker mySQL image
 https://hub.docker.com/_/mysql
@@ -46,7 +47,7 @@ docker stop CONTAINER_ID
 
 ### Connect to mySQL
 
-### EXPRESSJS Framework
+### ExpressJS Framework
 npm install express --save
 
 express has no notion of database nor authentication 
@@ -63,16 +64,23 @@ flush privileges;
 ```
 
 ##Convert to ExpressJS MVC mySql Application  
+
 ```https://ipenywis.com/tutorials/What-is-the-MVC,-Creating-a-%5BNode.js-Express%5D-MVC-Application```
 
 ## Never commit to git .env
 npm install dotenv --save
+
 ## Requests
 npm i body-parser
 
 ## Authentication Passport
 npm install passport
 
+``` https://www.youtube.com/watch?v=-RCnNyD0L-s&t=51s ```
+
 ## View Templates Library
 npm install ejs
+
+## bCrypt - try Argon later 
+npm i bcrypt
 

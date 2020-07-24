@@ -2,6 +2,22 @@ connection = require("../database/db");
 
 let res = [];
 
+
+var addData = function(callback,name,password,remembertoken,email) {
+     
+    connection.query('INSERT INTO nodetest.Users (name,password,rememberhash,email) VALUES (?,?,?,?)',[name,password,remembertoken,email],function(err,user,fields){
+        if (err) {
+            console.log(err);
+            callback(err,null);
+        }  else {
+            callback(null,user);
+            console.log(user);
+            connection.end(); 
+        }      
+       
+    });
+}
+
 var getData = function(callback) {
     
     connection.query('SELECT * FROM nodetest.Users',function(err,rows,fields){
@@ -44,8 +60,10 @@ exports.getUserByID = (username,password) => {
 
  getDataByID(function (err, result) {
     if (err){
+        console.log("err");  
         return err;
     } else{         
+        console.log("result");   
        res.push(result);            
     }
   },username,password);    
@@ -55,4 +73,17 @@ exports.getUserByID = (username,password) => {
 
  }
  
+ 
+exports.createUser = (name,password,remembertoken,email) => { 
+ 
+   addData(function (err, result) {
+     if (err){
+         return err;
+     } else{         
+         res.push(result);        
+     }
+   },name,password,remembertoken,email);    
+   
+   return res;
+ }
  
