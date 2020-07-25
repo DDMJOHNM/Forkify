@@ -13,7 +13,7 @@ const passport = require('passport');
 // require('./passport/passport');
 const initializePassport = require('./passport-config');
 initializePassport(passport);
-
+let flash = require('connect-flash');
 
 
 let ejs = require('ejs');
@@ -47,7 +47,7 @@ app.use(session({
   saveUninitialized:false,
 }));
 app.use(passport.session())
-//app.use(flash());
+app.use(flash());
 
 //template 
 app.set('view engine', 'ejs');

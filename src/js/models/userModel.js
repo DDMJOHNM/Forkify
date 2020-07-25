@@ -1,3 +1,5 @@
+const passport = require("passport");
+
 connection = require("../database/db");
 
 let res = [];
@@ -5,7 +7,7 @@ let res = [];
 
 var addData = function(callback,name,password,remembertoken,email) {
      
-    connection.query('INSERT INTO nodetest.Users (name,password,rememberhash,email) VALUES (?,?,?,?)',[name,password,remembertoken,email],function(err,user,fields){
+    connection.query('INSERT INTO nodetest.Users (name,email,rememberhash,password) VALUES (?,?,?,?)',[name,email,remembertoken,password],function(err,user,fields){
         if (err) {
              callback(err,null);
         }  else {
@@ -46,9 +48,9 @@ var  getDataByEmail = function(callback,email) {
 
     connection.query('SELECT * FROM nodetest.Users WHERE email=?',[email],function(err,rows,fields){        
         if (err) {  
-           callback(err,null);
+          return callback(err,null);
         }  else {
-            callback(null,rows);
+           return callback(null,rows);
             connection.end(); 
         }      
        
@@ -72,34 +74,30 @@ exports.getUserByID = (username,password) => {
 
  getDataByID(function (err, result) {
     if (err){
-        console.log(err);  
+        console.log(err,"err");  
         return err;
-    } else{         
-        console.log(result);   
+    } else{      
        res.push(result);            
     }
   },username,password);    
-
-    
+         
     return res;
 
  }
  
- exports.getUserbyEmail = (email) => {   
-    console.log(email,"email")
-    getDataByEmail(function (err, result) {
-       if (err){
-           console.log(err);  
-           return err;
-       } else{         
-           console.log(result);   
-          res.push(result);            
-       }
-     },email);    
+ exports.getUserbyEmail = (email) => { 
    
+   getDataByEmail(function (err, result) {
        
-       return res;
-   
+       if (err){
+          return err;
+       } else{                 
+          res.push(result);                         
+       }
+     },email);      
+     
+     return res
+
     }
     
  

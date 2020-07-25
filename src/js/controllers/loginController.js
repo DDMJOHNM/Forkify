@@ -13,3 +13,10 @@ exports.registerController = (req,res,next) =>{
     }
    
 };
+
+exports.indexController = (req,res,next) =>{
+    if(req.method == 'GET' ){       
+        res.render('index/index')
+    }
+   
+};

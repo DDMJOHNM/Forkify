@@ -87,4 +87,4 @@ npm i bcrypt
 ## Session
 npm i express-session
 npm i express-flash
-
+npm install connect-flash
