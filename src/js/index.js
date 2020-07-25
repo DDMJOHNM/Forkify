@@ -4,6 +4,7 @@ if (process.env.NODE_ENV !== 'production'){
 
 const express = require('express')
 const app = express()
+var cookieParser = require('cookie-parser')
 const mysql = require("mysql");
 const { template } = require('babel-core');
 const bootstrap = require("./bootstrap");
@@ -24,8 +25,20 @@ const session = require("express-session");
 //app.use('/static', express.static(__dirname, 'public'));
 
 //Request Parsing
-app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+app.use(cookieParser())
+app.use(passport.initialize())
+app.use(passport.session())
+
+//TODO secret to dot env
+app.use(session({
+  secret:'secret',
+  resave:false,
+  saveUninitialized:false,
+}));
+
+app.use(flash());
 
 const router = express.Router();
 //passed into app as middleware 
@@ -38,16 +51,7 @@ router.use((err, req, res, next) => {
 });
 
 //Auth 
-app.use(passport.initialize())
 
-//TODO secret to dot env
-app.use(session({
-  secret:'secret',
-  resave:false,
-  saveUninitialized:false,
-}));
-app.use(passport.session())
-app.use(flash());
 
 //template 
 app.set('view engine', 'ejs');

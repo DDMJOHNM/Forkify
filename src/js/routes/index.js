@@ -13,10 +13,11 @@ exports.appRoute = router => {
    router.get("/login",loginController.loginController);  
    router.get("/register",loginController.registerController);
   
-   router.post("/loginuser",passport.authenticate('local',{ successRedirect: '/',
-   failureRedirect: '/login' },function(req,res){
-     console.log(res);
-   }));
+   router.post("/loginuser",passport.authenticate('local',{
+    failureRedirect: '/login',
+    successRedirect: '/',
+    session:true
+    }));
   
    router.post("/registeruser", async(req,res)=>{    
       try {

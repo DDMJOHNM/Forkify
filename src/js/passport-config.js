@@ -26,16 +26,16 @@ function initialize(passport){
 
     passport.use(new LocalStrategy({usernameField: 'email'},
     authenticateUser))
-
     
-    // passport.serializeUser(function(user, done) {
-    //   done(null, user.id);
-    // });
-    // passport.deserializeUser(function(id, done) {
-    //   User.findById(id, function(err, user) {
-    //     done(err, user);
-    //   });
-    // });
+     passport.serializeUser(function(user, done) {
+         done(null,JSON.parse(JSON.stringify(user[0][0].ID)));
+     });
+     passport.deserializeUser(function(id, done) {
+      console.log(id,"deserialize")
+      //  User.findById(id, function(err, user) {
+      //    done(err, user);
+      //  });
+     });
 }
 
 module.exports = initialize
